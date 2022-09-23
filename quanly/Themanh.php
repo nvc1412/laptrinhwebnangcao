@@ -1,8 +1,4 @@
-<?php
-require_once("config.php");
-require_once("functions/functions.php");
-require_once("classes/dbConnection.php");
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,7 +43,7 @@ require_once("classes/dbConnection.php");
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="danhsach.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Danh sách thành viên</span></a>
@@ -59,7 +55,7 @@ require_once("classes/dbConnection.php");
                     <span>Thêm mới</span></a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="themanh.php">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Thêm ảnh</span></a>
@@ -286,52 +282,13 @@ require_once("classes/dbConnection.php");
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                 
-                    <h1>Danh sách người dùng</h1>
-                    <table class="table" id="tblUser">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">ID</th>
-                                <th scope="col">Name/Email</th>
-                                <th scope="col">Password</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $dbConnection = new dbConnection();
-                            $conn = $dbConnection->getConnection();
-
-                            $sql = "SELECT id, name, password FROM users";
-                            $result = $conn->query($sql);
-
-                            if ($result->num_rows > 0) {
-                                $stt = 0;
-                                while ($row = $result->fetch_assoc()) {
-                                    $stt++; ?>
-                                    <tr>
-                                        <th scope="row">
-                                            <?= $stt ?>
-                                        </th>
-                                        <td>
-                                            <?= $row["id"] ?>
-                                        </td>
-                                        <td>
-                                            <?= $row["name"] ?>
-                                        </td>
-                                        <td>
-                                            <?= $row["password"] ?>
-                                        </td>
-                                    </tr>
-                            <?php
-                                }
-                            } else {
-                                echo "0 results";
-                            }
-                            $conn->close();
-                            ?>
-                        </tbody>
-                    </table>
-
+                    <h1>Thêm mới ảnh</h1>
+                    <form action="uploadanh.php" method="post" enctype="multipart/form-data">
+                        Chọn file để upload:
+                        <input type="file" name="fileupload" id="fileupload">
+                        <input type="submit" value="Đăng ảnh" name="submit">
+                    </form>
+                    
                 </div>
                 <!-- /.container-fluid -->
 

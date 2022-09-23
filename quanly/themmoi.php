@@ -90,6 +90,12 @@ if ($action != "") {
                     <span>Thêm mới</span></a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="themanh.php">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Thêm ảnh</span></a>
+            </li>
+
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
