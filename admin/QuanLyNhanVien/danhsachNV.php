@@ -1,5 +1,15 @@
 <?php if(isset($_SESSION["logged"]) && $_SESSION["logged"] == 1){ ?>
 
+<?php
+    if(isset($_GET['page'])){
+        $page = $_GET['page'];
+    }else{
+        $page = 1;
+    }
+    $rowsPerPage = 5;
+    $perRow = $page*$rowsPerPage-$rowsPerPage;
+?>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script>
 <style type="text/css">
@@ -33,6 +43,28 @@
         color: black;
         opacity: 0.5;
     }
+    .pagination{
+        justify-content: flex-end;
+    }
+    /* thiết lập style cho thẻ a */
+    .pagination a {
+    color: black;
+    margin: 0 1px;
+    border: 1px solid;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    }
+    /* thiết lập style cho class active */
+    .pagination a.active {
+    background-color: dodgerblue;
+    color: white;
+    }
+    /* thêm màu nền khi người dùng hover vào class không active */
+    .pagination a:hover:not(.active) {
+    background-color: #ddd;
+    }
 </style>
 <script type="text/javascript">
     $(document).ready(function(){
@@ -53,8 +85,23 @@
                 require_once("config.php");
 
                 // Cố gắng thực thi truy vấn
-                $sql = "SELECT * FROM nhanvien";
+                $sql = "SELECT * FROM nhanvien LIMIT $perRow, $rowsPerPage";
                 if($result = mysqli_query($conn, $sql)){
+
+                    //Phân trang
+                    $tongnhanvien = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM nhanvien"));
+                    $tongsotrang = ceil($tongnhanvien/$rowsPerPage);
+
+                    $listPage="";
+                    for($i=1; $i<=$tongsotrang; $i++){
+                        if($page==$i){
+                            $listPage.='<a class="active" href="quantri.php?page_layout=danhsachNV&page='.$i.'">'.$i.'</a>';
+                        }else{
+                            $listPage.='<a href="quantri.php?page_layout=danhsachNV&page='.$i.'">'.$i.'</a>';
+                        }
+                    }
+
+                    //Đổ dữ liệu nhân viên
                     if(mysqli_num_rows($result) > 0){
                         echo "<table class='table table-bordered table-striped'>";
                             echo "<thead>";
@@ -98,7 +145,12 @@
                 mysqli_close($conn);
                 ?>
             </div>
-        </div>        
+        </div> 
+        
+        <div class="pagination">
+            <?php echo $listPage ?>
+        </div>
+        
     </div>
 </div>
 

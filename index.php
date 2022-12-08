@@ -45,8 +45,9 @@
     <div class="row">
         <div class="panel panel-info">
             <div class="panel-heading">
-                <h3 class="panel-title text-center"><img src="../upload/icon/new.gif" alt=""><a href="" class='product_title'>Sản phẩm mới </a><img src="../upload/icon/new.gif" alt=""></h3>
+                <h3 class="panel-title text-center"><img src="./img/icon/new.gif" alt=""><a href="#" style="font-size: 26px; color: red;" class='product_title'>Sản phẩm mới </a><img src="./img/icon/new.gif" alt=""></h3>
             </div>
+
             <div class="panel-body">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 clearpadding">
                     <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
@@ -61,7 +62,9 @@
                     </div>	
                 </div>
                 </div>
-            </div>	
+            </div>
+
+            
         </div>
         <div class="row">
             <div class="panel panel-info">

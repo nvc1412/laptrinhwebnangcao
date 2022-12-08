@@ -57,7 +57,7 @@ if(isset($_SESSION["logged"]) && $_SESSION["logged"] == 1){
                 // Cố gắng thực thi câu lệnh đã chuẩn bị
                 if(mysqli_stmt_execute($stmt)){
                     // Tạo bản ghi thành công. Chuyển hướng đến trang đích
-                    echo "<script> location.href = 'quantri.php'; </script>";
+                    echo "<script> location.href = 'quantri.php?page_layout=danhsachTK'; </script>";
                     exit();
                 } else{
                     echo "Oh, no. Có gì đó sai sai. Vui lòng thử lại.";
