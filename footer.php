@@ -1,5 +1,5 @@
-<div class="row" style="display: block;margin-bottom: 100px"></div>
-    <footer class="footer">
+<div class="row" style="display: block;margin-bottom: 30px"></div>
+    <footer style="position: relative; bottom: 0" class="footer">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6">
@@ -15,9 +15,9 @@
                     <div class="footer__widget">
                         <h6>SHOP ONLINE</h6>
                         <ul>
-                            <li><a href="#">Mới</a></li>
-                            <li><a href="#">Bán Chạy</a></li>
-                            <li><a href="#">Khuyến Mại</a></li>
+                            <li><a href="index.php?page_layout=TimKiem">Mới</a></li>
+                            <li><a href="index.php?page_layout=TimKiem">Bán Chạy</a></li>
+                            <li><a href="index.php?page_layout=TimKiem">Tất cả sản phẩm</a></li>
                         </ul>
                     </div>
                 </div>
@@ -25,9 +25,9 @@
                     <div class="footer__widget">
                         <h6>SHOP ONLINE</h6>
                         <ul>
-                            <li><a href="#">Liên hệ với chúng tôi</a></li>
-                            <li><a href="#">Phương thức thanh toán</a></li>
-                            <li><a href="#">Giao Hàng</a></li>
+                            <li><a href="index.php?page_layout=LienHe">Liên hệ với chúng tôi</a></li>
+                            <li><a href="index.php?page_layout=TroGiup">Phương thức thanh toán</a></li>
+                            <li><a href="index.php?page_layout=TroGiup">Chính sách và quy định chung</a></li>
                         </ul>
                     </div>
                 </div>
@@ -62,5 +62,10 @@
         </div>
     </footer>
     <script src="bootstrap/js/bootstrap.min.js"></script>
+    <style>
+        <?php
+            echo $active;
+        ?>
+    </style>
 </body>
 </html>

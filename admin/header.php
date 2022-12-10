@@ -72,13 +72,7 @@
                     <span>Quản lý tài khoản</span>
                 </a>
             </li>
-
-            <!-- <li class="nav-item">
-                <a id="themanh" class="nav-link" href="quantri.php?page_layout=themanh">
-                    <i id="themanh" class="fas fa-fw fa-table"></i>
-                    <span>Thêm ảnh</span></a>
-            </li> -->
-
+            
             <li class="nav-item">
                 <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
                     <i class="fas fa-fw fa-sign-out-alt"></i>

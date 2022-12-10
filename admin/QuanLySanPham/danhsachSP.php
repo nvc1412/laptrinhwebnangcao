@@ -84,7 +84,7 @@
                 require_once("config.php");
 
                 // Cố gắng thực thi truy vấn
-                $sql = "SELECT * FROM sanpham LIMIT $perRow, $rowsPerPage";
+                $sql = "SELECT * FROM sanpham ORDER BY id DESC LIMIT $perRow, $rowsPerPage";
 
                 if($result = mysqli_query($conn, $sql)){
 
@@ -110,6 +110,8 @@
                                     echo "<th>Tên</th>";
                                     echo "<th>Hãng</th>";
                                     echo "<th>Ảnh</th>";
+                                    echo "<th>Ảnh phụ 1</th>";
+                                    echo "<th>Ảnh phụ 2</th>";
                                     echo "<th>Giá</th>";
                                     echo "<th>Thông tin</th>";
                                     echo "<th>Action</th>";
@@ -122,6 +124,8 @@
                                     echo "<td>" . $row['TenSP'] . "</td>";
                                     echo "<td>" . $row['HangSP'] . "</td>";
                                     echo '<td> <img src="../img/sanpham/'.$row['AnhSP'].'" width="100" height="100"> </td>';
+                                    echo '<td> <img src="../img/sanpham/'.$row['AnhPhu1'].'" width="100" height="100"> </td>';
+                                    echo '<td> <img src="../img/sanpham/'.$row['AnhPhu2'].'" width="100" height="100"> </td>';
                                     echo "<td>" . number_format( $row['GiaSP']). " VNĐ" . "</td>";
                                     echo "<td>" . $row['ThongtinSP'] . "</td>";
                                     echo "<td>";

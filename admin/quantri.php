@@ -95,11 +95,6 @@ if(isset($_SESSION["logged"]) && $_SESSION["logged"] == 1){
                 include_once './QuanLyHoaDon/xoaHD.php';
                 $active="#danhsachHD{color: #00FFFF;}";
                 break;
-                
-            // case 'themanh':
-            //     include_once 'Themanh.php';
-            //     $active="#themanh{color: #00FFFF;}";
-            //     break;
         }
     }else {
         include_once './QuanLyNhanVien/danhsachNV.php';
