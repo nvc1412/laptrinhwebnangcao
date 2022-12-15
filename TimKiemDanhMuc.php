@@ -1,4 +1,3 @@
-
 <?php
     if(isset($_GET['page'])){
         $page = $_GET['page'];
@@ -7,6 +6,14 @@
     }
     $rowsPerPage = 8;
     $perRow = $page*$rowsPerPage-$rowsPerPage;
+?>
+
+<?php
+    if(isset($_GET['name'])){
+        $name = $_GET['name'];
+    }else{
+        $name = " ";
+    }
 ?>
 
 <style type="text/css">
@@ -83,11 +90,11 @@
                         <i class="fa fa-caret-down"></i>
                         </button>
                         <div class="dropdown-container" style="display: none;">
-                           <a href="index.php?page_layout=TimKiemDanhMuc&name=Nồi cơm điện" class="list-group-item">Nồi cơm điện</a>
-                           <a href="index.php?page_layout=TimKiemDanhMuc&name=Bếp ga" class="list-group-item">Bếp gas</a>
-                           <a href="index.php?page_layout=TimKiemDanhMuc&name=Bếp từ" class="list-group-item">Bếp từ</a>
-                           <a href="index.php?page_layout=TimKiemDanhMuc&name=Nồi" class="list-group-item">Xoong, Nồi</a>
-                           <a href="index.php?page_layout=TimKiemDanhMuc&name=Chảo" class="list-group-item">Chảo</a>
+                            <a href="index.php?page_layout=TimKiemDanhMuc&name=Nồi cơm điện" class="list-group-item">Nồi cơm điện</a>
+                            <a href="index.php?page_layout=TimKiemDanhMuc&name=Bếp ga" class="list-group-item">Bếp gas</a>
+                            <a href="index.php?page_layout=TimKiemDanhMuc&name=Bếp từ" class="list-group-item">Bếp từ</a>
+                            <a href="index.php?page_layout=TimKiemDanhMuc&name=Nồi" class="list-group-item">Xoong, Nồi</a>
+                            <a href="index.php?page_layout=TimKiemDanhMuc&name=Chảo" class="list-group-item">Chảo</a>
                         </div>
                      </div>
                   </div>
@@ -115,12 +122,13 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 clearpadding">
                <ol class="breadcrumb">
                   <li>
-                     <a href="#">
+                     <a href="index.php?page_layout=CuaHang">
                         <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                         Cửa hàng
                      </a>
                   </li>
-                  <li class="active">Tất cả sản phẩm</li>
+                  <li class="active">Tìm kiếm sản phẩm</li>
+                  <li class="active">Danh mục: "<?php echo $name ?>"</li>
                </ol>
                <div class="panel panel-info">
                   <!-- <div class="panel-heading">
@@ -130,20 +138,20 @@
                      <div style="display: flex;flex-wrap: wrap;" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 clearpadding">
                         <?php 
                               // Cố gắng thực thi truy vấn
-                              $sql = "SELECT * FROM sanpham LIMIT $perRow, $rowsPerPage";
+                              $sql = "SELECT * FROM sanpham WHERE DanhMucSP = '".$name."' LIMIT $perRow, $rowsPerPage";
 
                               if($result = mysqli_query($conn, $sql)){
 
                                  //Phân trang
-                                 $tongsanpham = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM sanpham"));
+                                 $tongsanpham = mysqli_num_rows(mysqli_query($conn, $sql));
                                  $tongsotrang = ceil($tongsanpham/$rowsPerPage);
 
                                  $listPage="";
                                  for($i=1; $i<=$tongsotrang; $i++){
                                        if($page==$i){
-                                          $listPage.='<a class="active" href="index.php?page_layout=CuaHang&page='.$i.'">'.$i.'</a>';
+                                          $listPage.='<a class="active" href="index.php?page_layout=TimKiemDanhMuc&page='.$i.'&name='.$name.'">'.$i.'</a>';
                                        }else{
-                                          $listPage.='<a href="index.php?page_layout=CuaHang&page='.$i.'">'.$i.'</a>';
+                                          $listPage.='<a href="index.php?page_layout=TimKiemDanhMuc&page='.$i.'&name='.$name.'">'.$i.'</a>';
                                        }
                                  }
 
@@ -154,11 +162,11 @@
                                           echo '<div style="margin-bottom: 30px" class="col-xs-12 col-sm-6 col-md-3 col-lg-3">';
                                              echo '<div class="product_item">';
                                                 echo '<div class="product-image">';
-                                                echo '<a href="index.php?page_layout=ChiTietSanPham&id='. $row['id'] .'"><img src="./img/sanpham/'.$row['AnhSP'].'" alt="" class=""></a>';
+                                                      echo '<a href="index.php?page_layout=ChiTietSanPham&id='. $row['id'] .'"><img src="./img/sanpham/'.$row['AnhSP'].'" alt="" class=""></a>';
                                                 echo '</div>';
                                                 echo '<p><a href="index.php?page_layout=ChiTietSanPham&id='. $row['id'] .'" class="product_name">'.$row['TenSP'].'</a></p>';
                                                 echo '<p><span class="price text-right"> '. number_format( $row['GiaSP']). " VNĐ" .'</span></p>';
-                                                echo '<a href="ThemVaoGioHang.php?id='. $row['id'] .'"><button class="btn btn-info"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Thêm giỏ hàng</button></a>';
+                                                echo '<a href="index.php?page_layout=GioHang"><button class="btn btn-info"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Thêm giỏ hàng</button></a>';
                                              echo '</div>';
                                           echo '</div>';
                                     }

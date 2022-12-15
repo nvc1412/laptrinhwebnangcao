@@ -82,11 +82,11 @@
                         <i class="fa fa-caret-down"></i>
                         </button>
                         <div class="dropdown-container" style="display: none;">
-                           <a href="#" class="list-group-item">Nồi cơm điện</a>
-                           <a href="#" class="list-group-item">Bếp gas</a>
-                           <a href="#" class="list-group-item">Bếp từ</a>
-                           <a href="#" class="list-group-item">Xoong</a>
-                           <a href="#" class="list-group-item">Chảo</a>
+                           <a href="index.php?page_layout=TimKiemDanhMuc&name=Nồi cơm điện" class="list-group-item">Nồi cơm điện</a>
+                           <a href="index.php?page_layout=TimKiemDanhMuc&name=Bếp ga" class="list-group-item">Bếp gas</a>
+                           <a href="index.php?page_layout=TimKiemDanhMuc&name=Bếp từ" class="list-group-item">Bếp từ</a>
+                           <a href="index.php?page_layout=TimKiemDanhMuc&name=Nồi" class="list-group-item">Xoong, Nồi</a>
+                           <a href="index.php?page_layout=TimKiemDanhMuc&name=Chảo" class="list-group-item">Chảo</a>
                         </div>
                      </div>
                   </div>
@@ -128,46 +128,46 @@
                   <div class="panel-body">
                      <div style="display: flex;flex-wrap: wrap;" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 clearpadding">
                         <?php 
-                              // Cố gắng thực thi truy vấn
-                              $sql = "SELECT * FROM sanpham LIMIT $perRow, $rowsPerPage";
+                           // Cố gắng thực thi truy vấn
+                           $sql = "SELECT * FROM sanpham LIMIT $perRow, $rowsPerPage";
 
-                              if($result = mysqli_query($conn, $sql)){
+                           if($result = mysqli_query($conn, $sql)){
 
-                                 //Phân trang
-                                 $tongsanpham = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM sanpham"));
-                                 $tongsotrang = ceil($tongsanpham/$rowsPerPage);
+                              //Phân trang
+                              $tongsanpham = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM sanpham"));
+                              $tongsotrang = ceil($tongsanpham/$rowsPerPage);
 
-                                 $listPage="";
-                                 for($i=1; $i<=$tongsotrang; $i++){
-                                       if($page==$i){
-                                          $listPage.='<a class="active" href="index.php?page_layout=TimKiem&page='.$i.'">'.$i.'</a>';
-                                       }else{
-                                          $listPage.='<a href="index.php?page_layout=TimKiem&page='.$i.'">'.$i.'</a>';
-                                       }
-                                 }
-
-                                 //Đổ dữ liệu sản phẩm
-                                 if(mysqli_num_rows($result) > 0){
-
-                                    while($row = mysqli_fetch_array($result)){
-                                          echo '<div style="margin-bottom: 30px" class="col-xs-12 col-sm-6 col-md-3 col-lg-3">';
-                                             echo '<div class="product_item">';
-                                                echo '<div class="product-image">';
-                                                      echo '<a href="index.php?page_layout=ChiTietSanPham&id='. $row['id'] .'"><img src="./img/sanpham/'.$row['AnhSP'].'" alt="" class=""></a>';
-                                                echo '</div>';
-                                                echo '<p><a href="index.php?page_layout=ChiTietSanPham&id='. $row['id'] .'" class="product_name">'.$row['TenSP'].'</a></p>';
-                                                echo '<p><span class="price text-right"> '. number_format( $row['GiaSP']). " VNĐ" .'</span></p>';
-                                                echo '<a href="index.php?page_layout=GioHang"><button class="btn btn-info"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Thêm giỏ hàng</button></a>';
-                                             echo '</div>';
-                                          echo '</div>';
+                              $listPage="";
+                              for($i=1; $i<=$tongsotrang; $i++){
+                                    if($page==$i){
+                                       $listPage.='<a class="active" href="index.php?page_layout=TimKiem&page='.$i.'">'.$i.'</a>';
+                                    }else{
+                                       $listPage.='<a href="index.php?page_layout=TimKiem&page='.$i.'">'.$i.'</a>';
                                     }
-                                    mysqli_free_result($result);
-                                 } else{
-                                    echo "<p class='lead'><em>Không tìm thấy bản ghi.</em></p>";
-                                 }
-                              } else{
-                                 echo "ERROR: Không thể thực thi $sql. " . mysqli_error($conn);
                               }
+
+                              //Đổ dữ liệu sản phẩm
+                              if(mysqli_num_rows($result) > 0){
+
+                                 while($row = mysqli_fetch_array($result)){
+                                       echo '<div style="margin-bottom: 30px" class="col-xs-12 col-sm-6 col-md-3 col-lg-3">';
+                                          echo '<div class="product_item">';
+                                             echo '<div class="product-image">';
+                                                   echo '<a href="index.php?page_layout=ChiTietSanPham&id='. $row['id'] .'"><img src="./img/sanpham/'.$row['AnhSP'].'" alt="" class=""></a>';
+                                             echo '</div>';
+                                             echo '<p><a href="index.php?page_layout=ChiTietSanPham&id='. $row['id'] .'" class="product_name">'.$row['TenSP'].'</a></p>';
+                                             echo '<p><span class="price text-right"> '. number_format( $row['GiaSP']). " VNĐ" .'</span></p>';
+                                             echo '<a href="index.php?page_layout=GioHang"><button class="btn btn-info"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Thêm giỏ hàng</button></a>';
+                                          echo '</div>';
+                                       echo '</div>';
+                                 }
+                                 mysqli_free_result($result);
+                              } else{
+                                 echo "<p class='lead'><em>Không tìm thấy bản ghi.</em></p>";
+                              }
+                           } else{
+                              echo "ERROR: Không thể thực thi $sql. " . mysqli_error($conn);
+                           }
                         ?>
                      </div>
                      </div>

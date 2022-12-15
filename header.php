@@ -116,9 +116,9 @@
                             <li id="TroGiup"><a href="index.php?page_layout=TroGiup">Trợ giúp</a></li>
                             <li id="LienHe"><a href="index.php?page_layout=LienHe">Liên hệ</a></li>
                             <li style="padding-top: 7px;margin-left: 10px">
-                                <form method="post" action="">
+                                <form method="post" action="index.php?page_layout=DanhSachTimKiem">
                                     <button class="btn-search_info" type="submit"><i class="fa fa-search"></i></button>
-                                    <input id="seach_info" type="text" name="search" placeholder="Tìm kiếm...">
+                                    <input required id="seach_info" type="text" name="search" placeholder="Tìm kiếm...">
                                 </form>
                             </li>
                         </ul>

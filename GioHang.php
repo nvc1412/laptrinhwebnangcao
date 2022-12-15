@@ -73,11 +73,11 @@
                                 <i class="fa fa-caret-down"></i>
                                 </button>
                                 <div class="dropdown-container" style="display: none;">
-                                    <a href="#" class="list-group-item">Nồi cơm điện</a>
-                                    <a href="#" class="list-group-item">Bếp gas</a>
-                                    <a href="#" class="list-group-item">Bếp từ</a>
-                                    <a href="#" class="list-group-item">Xoong</a>
-                                    <a href="#" class="list-group-item">Chảo</a>
+                                    <a href="index.php?page_layout=TimKiemDanhMuc&name=Nồi cơm điện" class="list-group-item">Nồi cơm điện</a>
+                                    <a href="index.php?page_layout=TimKiemDanhMuc&name=Bếp ga" class="list-group-item">Bếp gas</a>
+                                    <a href="index.php?page_layout=TimKiemDanhMuc&name=Bếp từ" class="list-group-item">Bếp từ</a>
+                                    <a href="index.php?page_layout=TimKiemDanhMuc&name=Nồi" class="list-group-item">Xoong, Nồi</a>
+                                    <a href="index.php?page_layout=TimKiemDanhMuc&name=Chảo" class="list-group-item">Chảo</a>
                                 </div>
                             </div>
                         </div>

@@ -56,6 +56,16 @@ if(isset($_GET["page_layout"])){
             include_once './ThanhToan.php';
             $active="#GioHang, #GioHang > a{color: #ffffff; background-color: rgb(45, 119, 238);}";
             break;
+
+        case 'TimKiemDanhMuc':
+            include_once './TimKiemDanhMuc.php';
+            $active="#CuaHang, #CuaHang > a{color: #ffffff; background-color: rgb(45, 119, 238);}";
+            break;
+
+        case 'DanhSachTimKiem':
+            include_once './DanhSachTimKiem.php';
+            $active="#CuaHang, #CuaHang > a{color: #ffffff; background-color: rgb(45, 119, 238);}";
+            break;
     }
 }else {
     include_once './Home.php';
