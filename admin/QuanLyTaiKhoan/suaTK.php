@@ -55,7 +55,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
             // Cố gắng thực thi câu lệnh đã chuẩn bị
             if(mysqli_stmt_execute($stmt)){
                 // Update thành công. Chuyển hướng đến trang đích
-                echo "<script> location.href = 'quantri.php'; </script>";
+                echo "<script> location.href = 'quantri.php?page_layout=danhsachTK'; </script>";
                 exit();
             } else{
                 echo "Oh, no. Có gì đó sai sai. Vui lòng thử lại.";
@@ -74,43 +74,67 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         // Lấy tham số URL
         $id =  trim($_GET["id"]);
         
-        // Chuẩn bị câu lệnh select
-        $sql = "SELECT * FROM users WHERE id = ?";
-        if($stmt = mysqli_prepare($conn, $sql)){
-            // Liên kết các biến với câu lệnh đã chuẩn bị
-            mysqli_stmt_bind_param($stmt, "i", $param_id);
-            
-            // Thiết lập tham số
-            $param_id = $id;
-            
-            // Cố gắng thực thi câu lệnh đã chuẩn bị
-            if(mysqli_stmt_execute($stmt)){
-                $result = mysqli_stmt_get_result($stmt);
-    
-                if(mysqli_num_rows($result) == 1){
-                    /* Lấy hàng kết quả dưới dạng một mảng kết hợp. Vì tập kết quả chỉ chứa một hàng, chúng ta không cần sử dụng vòng lặp while */
-                    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-                    
-                    // Lấy giá trị trường riêng lẻ
+        $sql = "SELECT * FROM users WHERE id = $id";
+        if($result = mysqli_query($conn, $sql)){
+            //Đổ dữ liệu sản phẩm
+            if(mysqli_num_rows($result) > 0){
+                while($row = mysqli_fetch_array($result)){
                     $name = $row["name"];
                     $password = $row["password"];
-                    $is_admin = $row["is_admin"];
-                } else{
-                    // URL không có id hợp lệ. Chuyển hướng đến trang error
-                    header("location: error.php");
-                    exit();
+                    $is_admin = $row["is_admin"]; 
                 }
-                
+        
+                // Giải phóng bộ nhớ
+                mysqli_free_result($result);
             } else{
-                echo "Oh, no. Có gì đó sai sai. Vui lòng thử lại.";
+                echo "<p class='lead'><em>Không tìm thấy bản ghi.</em></p>";
             }
+        } else{
+            echo "ERROR: Không thể thực thi $sql. " . mysqli_error($conn);
         }
-        
-        // Đóng câu lệnh
-        mysqli_stmt_close($stmt);
-        
+
         // Đóng kết nối
         mysqli_close($conn);
+        
+        
+        // PHAN NAY BI LOI CHO $result = mysqli_stmt_get_result($stmt); KHONG THUC HIEN DUOC!!!
+        // // Chuẩn bị câu lệnh select
+        // $sql = "SELECT * FROM users WHERE id = ?";
+        // if($stmt = mysqli_prepare($conn, $sql)){
+        //     // Liên kết các biến với câu lệnh đã chuẩn bị
+        //     mysqli_stmt_bind_param($stmt, "i", $param_id);
+            
+        //     // Thiết lập tham số
+        //     $param_id = $id;
+            
+        //     // Cố gắng thực thi câu lệnh đã chuẩn bị
+        //     if(mysqli_stmt_execute($stmt)){
+        //         $result = mysqli_stmt_get_result($stmt);
+    
+        //         if(mysqli_num_rows($result) == 1){
+        //             /* Lấy hàng kết quả dưới dạng một mảng kết hợp. Vì tập kết quả chỉ chứa một hàng, chúng ta không cần sử dụng vòng lặp while */
+        //             $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                    
+        //             // Lấy giá trị trường riêng lẻ
+        //             $name = $row["name"];
+        //             $password = $row["password"];
+        //             $is_admin = $row["is_admin"];
+        //         } else{
+        //             // URL không có id hợp lệ. Chuyển hướng đến trang error
+        //             header("location: error.php");
+        //             exit();
+        //         }
+                
+        //     } else{
+        //         echo "Oh, no. Có gì đó sai sai. Vui lòng thử lại.";
+        //     }
+        // }
+        
+        // // Đóng câu lệnh
+        // mysqli_stmt_close($stmt);
+        
+        // // Đóng kết nối
+        // mysqli_close($conn);
     }  else{
         // URL không chứa tham số id. Chuyển hướng đến trang error
         header("location: error.php");
